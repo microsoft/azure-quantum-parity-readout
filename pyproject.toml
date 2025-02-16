@@ -1,0 +1,30 @@
+[project]
+name = "parity-readout"
+version = "2025.1.0"
+description = "Data and analysis scripts for paper 'Interferometric Single-Shot Parity Measurement in an InAs-Al Hybrid Device'"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "arviz>=0.20.0",
+    "azure-quantum-tgp==1.1.0",
+    "bottleneck>=1.4.2",
+    "circle-fit>=0.2.1",
+    "dask[distributed]>=2024.6.2",
+    "ipykernel>=6.29.5",
+    "jupyter>=1.1.1",
+    "jupytext>=1.16.6",
+    "lmfit>=1.2.2",
+    "matplotlib>=3.7.0",
+    "numpy>=1.23.5",
+    "opencv-python==4.7.0.72",
+    "pymc==5.10.3",
+    "scikit-image>=0.22.0",
+    "scikit-learn>=1.6.0",
+    "scikit-spatial>=7.0.0",
+    "scipy>=1.14.1",
+    "sympy>=1.11.1",
+    "tqdm>=4.64.1",
+    "uncertainties>=3.1.7",
+    "xarray>=2023.4.1",
+    "xarray-einstats>=0.7.0",
+]
