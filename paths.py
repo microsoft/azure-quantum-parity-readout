@@ -2,7 +2,7 @@ from pathlib import Path
 
 DATA_FOLDER = Path(__file__).absolute().parent / "data"
 
-assert DATA_FOLDER.exists(), "The data directory doesn't exist, make sure to download and prepare the data as described in the repository README.md"
+DATA_FOLDER.mkdir(exist_ok=True)
 
 RAW_DATA_FOLDER = DATA_FOLDER / "raw_data"
 CONVERTED_DATA_FOLDER = DATA_FOLDER / "converted_data"
@@ -11,7 +11,9 @@ CQ_CONV_INTERMEDIATE_FIGURE_FOLDER = DATA_FOLDER / "cq_conv_figs"
 
 # The raw data must be downloaded from zenodo to be able to generate the plots
 if not RAW_DATA_FOLDER.exists():
-    print("The raw data directory doesn't exist, make sure to download and prepare the data as described in the repository README.md")
+    print(
+        "The raw data directory doesn't exist, make sure to download and prepare the data as described in the repository README.md"
+    )
 
 # The converted_data and simulated folders are included in the zenodo files but can
 # also be regenerated if one wishes to reproduce them.
