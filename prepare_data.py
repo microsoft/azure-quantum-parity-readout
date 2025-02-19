@@ -57,9 +57,14 @@ minimal_files = [
 def process_file(filename):
     full_path = os.path.join(basepath, filename)
     if not is_zipfile(full_path):
-        print(
-            f"Cannot find {full_path}, some files may be missing for the full analysis."
-        )
+        if filename in minimal_files:
+            print(
+                f"Cannot find {full_path} required for reproducing of the paper figures"
+            )
+        else:
+            print(
+                f"Skip optional {full_path}, needed for reproducing of Cq converted data"
+            )
     else:
         print(f"Unpacking {full_path}")
         with ZipFile(full_path, "r") as myzip:
@@ -102,8 +107,8 @@ already downloaded the data, you can skip this step.
 
         if minimal_dataset is None:
             minimal_dataset = input(
-                """\n\nDo you want to download the minimal datasets required reproduce the paper (~6GB)?
-Answer yes to download {converted_data.zip, simulated.zip, tgp2_tuneup.zip} and no
+                f"""\n\nDo you want to download the minimal datasets required reproduce the paper (~6GB)?
+Answer yes (Y) to download {minimal_files} and no (n)
 to download all datasets (~150Gb+).
 [Y/n] """
             )
