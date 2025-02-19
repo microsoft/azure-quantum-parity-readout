@@ -12,7 +12,7 @@ All references to figure numbers in this repository refer to the peer-reviewed r
 Measured and simulated data is available in the accompanying dataset on [Zenodo](https://zenodo.org/records/14804380). You can download it manually and point to the data
 folder in [paths.py](paths.py), see [Data Paths](#data-paths) for more info.
 
-For convenience, you can also run `./download_data.sh` in your shell, which will download the data from Zenodo
+For convenience, you can also run `prepare_data.py` python script, which will download the data from Zenodo
 and put it in a folder called `data`.
 
 ### Data Paths
@@ -28,7 +28,7 @@ The paths to these folder variables are defined in [`paths.py`](paths.py). By de
 a folder named `data` in the root of this repository. These variables are propagated through the various
 scripts that rely on measured, simulated or CQ converted data.
 
-We provide an `unzip.py` python script to automatically generate this target directory structure from
+Provided an `prepare_data.py` python script automatically generates this target directory structure from
 the downloaded zip files. In case this fails (e.g. due to a different OS), the zip outputs on the
 zenodo should correspond to the following directories:
 
@@ -65,7 +65,7 @@ As a result, the minimal datasets you need to download from [Zenodo](https://zen
 - `dot_tuneup_A1.zip` (0.8 MB)
 - `tgp2_tuneup.zip` (20.1 MB)
 
-You should put these files in a directory named `data` and then run `unzip.py` to extract the files into their respective locations automatically.
+You should put these files in a directory named `data` and then run `prepare_data.py` to extract the files into their respective locations automatically.
 
 ## Requirements
 
