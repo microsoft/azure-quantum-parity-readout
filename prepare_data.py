@@ -27,42 +27,46 @@ from zipfile import ZipFile, ZIP_DEFLATED, is_zipfile
 from concurrent.futures import ProcessPoolExecutor
 
 zipfiles = [
-    'charge_noise.zip',
-    'converted_data.zip',
-    'cut_loop_A.zip',
-    'cut_loop_B.zip',
-    'dot_tuneup_A1.zip',
-    'injector.zip',
-    'mpr_A1.zip',
-    'mpr_A2.zip',
-    'mpr_B1.zip',
-    'qdmzm_A1.zip',
-    'qpp.zip',
-    'simulated.zip',
-    'tgp2_tuneup.zip',
-    'thermometry.zip',
-    'trivial_A.zip',
-    'trivial_B.zip'
+    "charge_noise.zip",
+    "converted_data.zip",
+    "cut_loop_A.zip",
+    "cut_loop_B.zip",
+    "dot_tuneup_A1.zip",
+    "injector.zip",
+    "mpr_A1.zip",
+    "mpr_A2.zip",
+    "mpr_B1.zip",
+    "qdmzm_A1.zip",
+    "qpp.zip",
+    "simulated.zip",
+    "tgp2_tuneup.zip",
+    "thermometry.zip",
+    "trivial_A.zip",
+    "trivial_B.zip",
 ]
 
 minimal_files = [
-    'converted_data.zip',
-    'simulated.zip',
-    'tgp2_tuneup.zip',
-    'charge_noise.zip',
-    'dot_tuneup_A1.zip'
+    "converted_data.zip",
+    "simulated.zip",
+    "tgp2_tuneup.zip",
+    "charge_noise.zip",
+    "dot_tuneup_A1.zip",
 ]
+
 
 def process_file(filename):
     full_path = os.path.join(basepath, filename)
     if not is_zipfile(full_path):
-        print(f"Cannot find {full_path}, some files may be missing for the full analysis.")
+        print(
+            f"Cannot find {full_path}, some files may be missing for the full analysis."
+        )
     else:
         print(f"Unpacking {full_path}")
-        with ZipFile(full_path, 'r') as myzip:
+        with ZipFile(full_path, "r") as myzip:
             myzip.extractall(path=basepath)
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
 
     download, minimal_dataset = None, None
     if "--download-all" in sys.argv:
@@ -74,7 +78,7 @@ if __name__=="__main__":
 
     if download is None:
         to_download = input(
-f"""To run the code in this repo and reproduce the paper figures, you
+            f"""To run the code in this repo and reproduce the paper figures, you
 will need access to the measurement and simulation data. You can do so
 by downloading it from {zenodo_record} and placing
 it in a folder named data (total path should be parity-readout/data).
@@ -82,7 +86,8 @@ it in a folder named data (total path should be parity-readout/data).
 Do you want to download the data using this script (this will query
 {zenodo_file_api})? If you have
 already downloaded the data, you can skip this step.
-[Y/n] """)
+[Y/n] """
+        )
 
         if to_download == "Y":
             download = True
@@ -97,23 +102,30 @@ already downloaded the data, you can skip this step.
 
         if minimal_dataset is None:
             minimal_dataset = input(
-        """\n\nDo you want to download the minimal datasets required reproduce the paper (~6GB)?
+                """\n\nDo you want to download the minimal datasets required reproduce the paper (~6GB)?
 Answer yes to download {converted_data.zip, simulated.zip, tgp2_tuneup.zip} and no
 to download all datasets (~150Gb+).
-[Y/n] """)
+[Y/n] """
+            )
 
         if minimal_dataset == "Y":
 
             for file_name in minimal_files:
                 print("\nDownloading", file_name)
-                _ = wget.download(f"{zenodo_individual_files_api}/{file_name}", out=f"{basepath}/{file_name}")
+                _ = wget.download(
+                    f"{zenodo_individual_files_api}/{file_name}",
+                    out=f"{basepath}/{file_name}",
+                )
 
         elif minimal_dataset == "n":
 
             for file_name in zipfiles:
                 if not is_zipfile(f"{basepath}/{file_name}"):
                     print("\nDownloading", file_name)
-                    _ = wget.download(f"{zenodo_individual_files_api}/{file_name}", out=f"{basepath}/{file_name}")
+                    _ = wget.download(
+                        f"{zenodo_individual_files_api}/{file_name}",
+                        out=f"{basepath}/{file_name}",
+                    )
                 else:
                     print(f"\nFound {file_name}, skipping download")
 
