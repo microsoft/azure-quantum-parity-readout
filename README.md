@@ -28,9 +28,9 @@ The paths to these folder variables are defined in [`paths.py`](paths.py). By de
 a folder named `data` in the root of this repository. These variables are propagated through the various
 scripts that rely on measured, simulated or CQ converted data.
 
-We provided a python script [`prepare_data.py`](prepare_data.py) that (optionally) downloads the data from zenodo 
+We provided a python script [`prepare_data.py`](prepare_data.py) that (optionally) downloads the data from zenodo
 and automatically generates this target directory structure. When you execute the script, you will have the option to
-download all our datasets (~150Gb), a minimal subset of datasets to reproduce the plots in the paper (~6GB) or manually 
+download all our datasets (~150Gb), a minimal subset of datasets to reproduce the plots in the paper (~6GB) or manually
 download the data. After that the script will unpack the zip files into their target directory.
 In case this fails (e.g. due to a different OS), the zip outputs on the
 zenodo should correspond to the following directories:
