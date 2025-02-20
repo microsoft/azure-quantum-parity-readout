@@ -2,10 +2,26 @@
 
 This repository contains parity readout simulation code and scripts for generating data-driven figures for the published paper "Interferometric Single-Shot Parity Measurement in InAs-Al Hybrid Devices" by Microsoft Azure Quantum.
 * Preprint: [arXiv:2401.09549](https://arxiv.org/abs/2401.09549)
-* Peer-reviewed publication : To appear in Nature (February 2025)
+* Peer-reviewed publication: [Nature 638, 651–655 (2025).](https://doi.org/10.1038/s41586-024-08445-2)
 
 All references to figure numbers in this repository refer to the peer-reviewed revision of the paper published in Nature which may differ from the preprint.
 
+## Requirements
+
+The data analysis and figure generating scripts in this repository were run using Python 3.10.9 and the environment specified in [`uv.lock`](uv.lock) (we also provide a [`requirements.txt`](requirements.txt) for advanced users
+who do not wish to use `uv`).
+
+The simulation data and figures were generated using Julia `v1.10.8`. See [ParityReadoutSimulator/README.md](ParityReadoutSimulator/README.md) for additional information on the `ParityReadoutSimulator` and Julia environment requirements.
+
+The quickest way to reproduce the environment used for data analysis and figure generation is to use the
+tool [`uv`](https://docs.astral.sh/uv/), which can be installed by following [these instructions](https://docs.astral.sh/uv/getting-started/installation/).
+
+Once `uv` is installed, running the following commands will install the necessary software into an isolated
+environment, and activate that environment for future use:
+```bash
+uv sync # download Python 3.10.9, and all dependencies, creating a virtual environment with everything installed
+source .venv/bin/activate  # activate the virtual environment
+```
 
 ## Data
 
@@ -70,22 +86,12 @@ As a result, the minimal datasets you need to download from [Zenodo](https://zen
 
 If downloaded manually, you should put these files in a directory named `data` and then run [`prepare_data.py`](prepare_data.py) to extract the files into their respective locations automatically.
 
-## Requirements
+## Minimal code for reproducing measured figures
 
-The data analysis and figure generating scripts in this repository were run using Python 3.10.9 and the environment specified in [`uv.lock`](uv.lock) (we also provide a [`requirements.txt`](requirements.txt) for advanced users
-who do not wish to use `uv`).
+If you are only interested in reproducing the figures, you need to follow the instructions in [Requirements](#requirements)
+and downloading the minimal datasets when asked by `prepare_data.py` (i.e. run `python prepare_data.py --download-minimal`).
 
-The simulation data and figures were generated using Julia `v1.10.8`. See [ParityReadoutSimulator/README.md](ParityReadoutSimulator/README.md) for additional information on the `ParityReadoutSimulator` and Julia environment requirements.
-
-The quickest way to reproduce the environment used for data analysis and figure generation is to use the
-tool [`uv`](https://docs.astral.sh/uv/), which can be installed by following [these instructions](https://docs.astral.sh/uv/getting-started/installation/).
-
-Once `uv` is installed, running the following commands will install the necessary software into an isolated
-environment, and activate that environment for future use:
-```bash
-uv sync # download Python 3.10.9, and all dependencies, creating a virtual environment with everything installed
-source .venv/bin/activate  # activate the virtual environment
-```
+Now that the data and environment are ready, you can run `jupytext --execute measured_analysis_figures/figure*.md`
 
 ## Modules
 
