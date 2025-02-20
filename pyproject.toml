@@ -25,6 +25,7 @@ dependencies = [
     "sympy>=1.11.1",
     "tqdm>=4.64.1",
     "uncertainties>=3.1.7",
+    "wget>=3.2",
     "xarray==2023.4.1",
     "xarray-einstats>=0.7.0",
 ]

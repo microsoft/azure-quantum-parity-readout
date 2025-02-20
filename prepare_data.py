@@ -1,14 +1,13 @@
-import sys, os
-import subprocess
+import os
+import sys
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
+from zipfile import ZipFile, is_zipfile
+
+import wget
 
 sys.path.append(".")
 from paths import DATA_FOLDER
-
-try:
-    import wget
-except:
-    raise Exception("To use `prepare_data.py` you need to pip install wget")
 
 # if len(sys.argv) == 1:
 basepath = str(DATA_FOLDER)
@@ -22,9 +21,6 @@ zenodo_doi = "14804380"
 zenodo_record = f"https://zenodo.org/records/{zenodo_doi}"
 zenodo_file_api = f"https://zenodo.org/api/records/{zenodo_doi}/files-archive"
 zenodo_individual_files_api = f"https://zenodo.org/records/{zenodo_doi}/files"
-
-from zipfile import ZipFile, ZIP_DEFLATED, is_zipfile
-from concurrent.futures import ProcessPoolExecutor
 
 zipfiles = [
     "charge_noise.zip",
@@ -72,7 +68,6 @@ def process_file(filename):
 
 
 if __name__ == "__main__":
-
     download, minimal_dataset = None, None
     if "--download-all" in sys.argv:
         download = True
@@ -102,7 +97,6 @@ already downloaded the data, you can skip this step.
             raise ValueError("Answer to download can be either Y or n.")
 
     if download:
-
         Path(basepath).mkdir(exist_ok=True)
 
         if minimal_dataset is None:
@@ -114,7 +108,6 @@ to download all datasets (~150Gb+).
             )
 
         if minimal_dataset == "Y":
-
             for file_name in minimal_files:
                 print("\nDownloading", file_name)
                 _ = wget.download(
@@ -123,7 +116,6 @@ to download all datasets (~150Gb+).
                 )
 
         elif minimal_dataset == "n":
-
             for file_name in zipfiles:
                 if not is_zipfile(f"{basepath}/{file_name}"):
                     print("\nDownloading", file_name)

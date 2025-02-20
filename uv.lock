@@ -1879,6 +1879,7 @@ dependencies = [
     { name = "sympy" },
     { name = "tqdm" },
     { name = "uncertainties" },
+    { name = "wget" },
     { name = "xarray" },
     { name = "xarray-einstats" },
 ]
@@ -1905,6 +1906,7 @@ requires-dist = [
     { name = "sympy", specifier = ">=1.11.1" },
     { name = "tqdm", specifier = ">=4.64.1" },
     { name = "uncertainties", specifier = ">=3.1.7" },
+    { name = "wget", specifier = ">=3.2" },
     { name = "xarray", specifier = "==2023.4.1" },
     { name = "xarray-einstats", specifier = ">=0.7.0" },
 ]
@@ -2976,6 +2978,12 @@ sdist = { url = "https://files.pythonhosted.org/packages/e6/30/fba0d96b4b5fbf594
 wheels = [
     { url = "https://files.pythonhosted.org/packages/5a/84/44687a29792a70e111c5c477230a72c4b957d88d16141199bf9acb7537a3/websocket_client-1.8.0-py3-none-any.whl", hash = "sha256:17b44cc997f5c498e809b22cdf2d9c7a9e71c02c8cc2b6c56e7c2d1239bfa526", size = 58826 },
 ]
+
+[[package]]
+name = "wget"
+version = "3.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/47/6a/62e288da7bcda82b935ff0c6cfe542970f04e29c756b0e147251b2fb251f/wget-3.2.zip", hash = "sha256:35e630eca2aa50ce998b9b1a127bb26b30dfee573702782aa982f875e3f16061", size = 10857 }
 
 [[package]]
 name = "widgetsnbextension"
