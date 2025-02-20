@@ -6,6 +6,30 @@ This repository contains parity readout simulation code and scripts for generati
 
 All references to figure numbers in this repository refer to the peer-reviewed revision of the paper published in Nature which may differ from the preprint.
 
+If you are interested in generating the plots in the paper with minimal interaction with this repo, look at the sections [Requirements](#requirements), [Minimal Data to Reproduce Figures](#minimal-data-to-reproduce-figures) and [Minimal Code for Reproducing Measured Figures](#minimal-code-for-reproducing-measured-figures).
+
+---
+
+**Table of Contents**
+* [Requirements](#requirements)
+* [Data](#data)
+    + [Data Paths](#data-paths)
+    + [Minimal Data to Reproduce Figures](#minimal-data-to-reproduce-figures)
+* [Reproducing Figures in the Paper](#reproducing-figures-in-the-paper)
+    + [Minimal code for reproducing measured figures](#minimal-code-for-reproducing-measured-figures)
+    + [Reproducing Simulation Figures](#reproducing-simulation-figures)
+    + [More advanced analyses/testing](#more-advanced-analysestesting)
+* [Modules](#modules)
+    + [1. `cq_conversion`](#1-cq_conversion)
+    + [2. `measured_analysis_figures`](#2-measured_analysis_figures)
+        - [Additional Requirements](#additional-requirements)
+    + [3. `ParityReadoutSimulator`](#3-parityreadoutsimulator)
+    + [4. `thermometry`](#4-thermometry)
+* [Microsoft Open Source Code of Conduct](#microsoft-open-source-code-of-conduct)
+* [Trademarks](#trademarks)
+
+---
+
 ## Requirements
 
 The data analysis and figure generating scripts in this repository were run using Python 3.10.9 and the environment specified in [`uv.lock`](uv.lock) (we also provide a [`requirements.txt`](requirements.txt) for advanced users
@@ -28,11 +52,11 @@ source .venv/bin/activate  # activate the virtual environment
 Measured and simulated data is available in the accompanying dataset on [Zenodo](https://zenodo.org/records/14804380). You can download it manually and point to the data
 folder in [paths.py](paths.py), see [Data Paths](#data-paths) for more info.
 
-For convenience, you can also run [`prepare_data.py`](prepare_data.py) python script, which will download the data from Zenodo
+For convenience, you can also run the [`prepare_data.py`](prepare_data.py) python script, which will download the data from Zenodo
 and put it in a folder called `data`.
 
 ### Data Paths
-As an interface for all our code, all raw and generated data is organized into the following folder variables:
+As an interface for all our code, all raw and generated data are organized into the following folder variables:
 
 - `DATA_FOLDER`: Variable for a folder containing four subdirectories outlined below
 - `RAW_DATA_FOLDER`: Variable for a folder containing all measured data to be used for analysis and plotting.
@@ -45,7 +69,7 @@ a folder named `data` in the root of this repository. These variables are propag
 scripts that rely on measured, simulated or CQ converted data.
 
 We provided a python script [`prepare_data.py`](prepare_data.py) that (optionally) downloads the data from zenodo
-and automatically generates this target directory structure. When you execute the script, you will have the option to
+and automatically generates this target directory structure. When you execute this script, you will have the option to
 download all our datasets (~150Gb), a minimal subset of datasets to reproduce the plots in the paper (~6GB) or manually
 download the data. After that the script will unpack the zip files into their target directory.
 In case this fails (e.g. due to a different OS), the zip outputs on the
@@ -75,7 +99,8 @@ except for `figureS6_dot_tuneup.md`, `figureS7_tgp2_tuneup.md` and `figureS18_de
 
 Some of the raw datasets (all datasets labelled `run_name.zip`) contain timetraces that were left uncoarsened and as a result, are really large. If you are only interested
 in using the coarsened data to regenerate a figure, you can download the `converted_data.zip` file from zenodo. This zip contains all the CQ converted RF measurements used to
-generate the figures (see note in previous subsection).
+generate the figures (see note in previous subsection
+for more details).
 
 As a result, the minimal datasets you need to download from [Zenodo](https://zenodo.org/records/14804380) to reproduce all figures in the paper are:
 - `simulated.zip` (1.0 GB)
@@ -86,12 +111,24 @@ As a result, the minimal datasets you need to download from [Zenodo](https://zen
 
 If downloaded manually, you should put these files in a directory named `data` and then run [`prepare_data.py`](prepare_data.py) to extract the files into their respective locations automatically.
 
-## Minimal code for reproducing measured figures
+## Reproducing Figures in the Paper
+
+### Minimal code for reproducing measured figures
 
 If you are only interested in reproducing the figures, you need to follow the instructions in [Requirements](#requirements)
 and downloading the minimal datasets when asked by `prepare_data.py` (i.e. run `python prepare_data.py --download-minimal`).
 
 Now that the data and environment are ready, you can run `jupytext --execute measured_analysis_figures/figure*.md`
+
+### Reproducing Simulation Figures
+
+To reproduce simulation figures, follow the instructions in [ParityReadoutSimulator/README.md](ParityReadoutSimulator/README.md)
+to setup the environment. You should then be able to reproduce the simulated figures and reference datasets by running through
+the notebooks manually. You can also do the following to automate the generation of all of the below.
+
+### More advanced analyses/testing
+
+For more advanced users, refer to the below section on the various [Modules](#modules) in this repo.
 
 ## Modules
 
